@@ -1,0 +1,57 @@
+body {
+    font-family: 'Crete Round', serif;
+    text-align: center;
+    background-color: black;
+    margin: 0;
+}
+
+button {
+    border:0;
+    height: 100%;
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.0rem;
+    outline: 0;
+}
+
+
+.active {
+    background-color: deepskyblue;
+    
+}
+
+.square {
+    background-color: blueviolet;
+    height: 200px;
+    width: 200px;
+    margin: 1.66% 1.66%;
+    float: left;
+    border-radius: 25px;
+    transition: background 0.6s;
+}
+
+h1 {
+    background-color: deepskyblue;
+    text-transform: uppercase;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 2.0rem;
+}
+
+p {
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+
+#container {
+    width: 750px;
+    margin: 30px auto;
+}
+
+#feedbackText {
+    width: 100px;
+    display: inline-block;
+}
