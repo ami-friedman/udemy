@@ -66,7 +66,8 @@ function reset(numOfColors) {
         squares[i].style.backgroundColor = randomRGB();
         var newColor = squares[randomize(currentGameLevel)].style.backgroundColor;
         colorToGuessDisplay.textContent = newColor;
-        document.querySelector("h1").style.backgroundColor = "deepskyblue";
+        colorToGuessDisplay.style.backgroundColor = newColor;
+        document.querySelector("h1").style.backgroundColor = "steelblue";
     }
 }
 
