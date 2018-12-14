@@ -1,10 +1,16 @@
  var express = require("express");
  var app = express();
  var bodyParser = require("body-parser");
+ var expressLogging = require('express-logging');
+ var logger = require('logops');
+
 
  app.use(bodyParser.urlencoded({extended: true}));
+ app.use(expressLogging(logger));
 
  app.set("view engine","ejs");
+
+ var friends = ["Chaim","Yaakov", "Shmuli"];
 
  app.get("/", function(req, res){
     res.render("home");
@@ -12,12 +18,12 @@
 
 
 app.post("/addfriend", function(req, res){
-    console.log(req.body);
-    res.send("YOu have reached POST!!");
+    var newFriend = req.body.newfriend;
+    friends.push(newFriend);
+    res.redirect("/friends");
  });
 
  app.get("/friends", function(req, res){
-    var friends = ["Chaim","Yaakov", "Shmuli"];
     res.render("friends",{friends: friends});
  });
 
