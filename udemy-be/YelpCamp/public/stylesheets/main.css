@@ -4,4 +4,9 @@
 
 .thumbnail {
     padding: 0;
+    padding-bottom: 10px;
+}
+
+.delete-form {
+    display: inline;
 }

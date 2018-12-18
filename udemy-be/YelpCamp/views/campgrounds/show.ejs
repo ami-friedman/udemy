@@ -18,6 +18,15 @@
                             <h4 class="pull-right">$9.00/night</h4>
                             <h4><a href="#"><%= campground.name %></a></h4>
                             <p><%= campground.description %></p>
+                            <p>
+                                <em>Added by <%= campground.author.username %></em>
+                            </p>
+                            <% if (user && campground.author.id.equals(user._id))  { %>
+                            <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                            <form class="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                            <% } %>
                     </div>
             </div>
             <div class="well">
@@ -29,12 +38,19 @@
                                 <% campground.comments.forEach(function(comment){ %>
                                     <hr>
                                     <p>
-                                         <strong> <%= comment.author %> </strong>
+                                         <strong> <%= comment.author.username %> </strong>
                                          <span class="pull-right">10 Days Ago</span>
                                     </p>
                                     <p>
                                         <%= comment.text %>
                                     </p>
+                                    <% if (user && comment.author.id.equals(user._id))  { %>
+                                    <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                                    <form class="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                        <input class="btn btn-xs btn-danger" type="submit" value="Delete">
+                                    </form>
+                                    <% } %>
+
                                 <% }) %>
                         </div>
                     </div>

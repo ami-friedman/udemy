@@ -1,6 +1,7 @@
-var mongoose   = require("mongoose");
-var Campground = require("./models/campground");
-var Comment = require("./models/comment");
+const mongoose   = require("mongoose"),
+      Campground = require("./models/campground"),
+      User       = require("./models/user");
+      Comment    = require("./models/comment");
 
 mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true });
 
@@ -29,48 +30,52 @@ var data = [
 ]
 
 function seedDB(){
-    Comment.deleteMany({}, function(err){
+    User.deleteMany({}, function (err){
         if (err){
             console.log(err);
         } else {
-            console.log("Removed comments");
-            Campground.deleteMany({}, function(err){
+            console.log("Removed users");
+            Comment.deleteMany({}, function(err){
                 if (err){
                     console.log(err);
                 } else {
-                    console.log("Removed Campgrounds");
-                    data.forEach(function(campg){
-                        Campground.create(campg, function(err, savedCamp){
-                            if (err){
-                                console.log(err);
-                            } else {
-                                console.log("Saved new camp");
-                                Comment.create(
-                                    {
-                                        text: "Id aliquet lectus proin nibh nisl condimentum id venenatis a. Vivamus arcu felis bibendum ut tristique et. Amet venenatis urna cursus eget nunc scelerisque. Facilisi morbi tempus iaculis urna. ",
-                                        author: "Mark Twain"
-                                    },
-                                    function (err, newComment){
-                                        if (err){
-                                            console.log(err);
-                                        } else {
-                                            savedCamp.comments.push(newComment);
-                                            savedCamp.save();
-                                            console.log("saved new comment");
-                                        }
+                    console.log("Removed comments");
+                    Campground.deleteMany({}, function(err){
+                        if (err){
+                            console.log(err);
+                        } else {
+                            console.log("Removed Campgrounds");
+                            data.forEach(function(campg){
+                                Campground.create(campg, function(err, savedCamp){
+                                    if (err){
+                                        console.log(err);
+                                    } else {
+                                        console.log("Saved new camp");
+                                        Comment.create(
+                                            {
+                                                text: "Id aliquet lectus proin nibh nisl condimentum id venenatis a. Vivamus arcu felis bibendum ut tristique et. Amet venenatis urna cursus eget nunc scelerisque. Facilisi morbi tempus iaculis urna. ",
+                                                author: "Mark Twain"
+                                            },
+                                            function (err, newComment){
+                                                if (err){
+                                                    console.log(err);
+                                                } else {
+                                                    savedCamp.comments.push(newComment);
+                                                    savedCamp.save();
+                                                    console.log("saved new comment");
+                                                }
+                                            }
+                                        )
                                     }
-                                )
-                            }
-            
-                        })
+                    
+                                })
+                            });
+                        }
                     });
                 }
             });
-
         }
-
     });
-    
 }
 
 module.exports = seedDB;
