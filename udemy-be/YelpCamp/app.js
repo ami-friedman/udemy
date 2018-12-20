@@ -8,6 +8,7 @@ const express               = require("express"),
       passport              = require("passport"),
       localStrategy         = require("passport-local"),
       expressSession        = require("express-session"),
+      flash                 = require("connect-flash"),
       User                  = require("./models/user");
 
 const campgroundRoutes = require("./routes/campgrounds");
@@ -32,8 +33,12 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(flash());
+
 app.use(function(req, res, next){
     res.locals.user = req.user;
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 });
 
