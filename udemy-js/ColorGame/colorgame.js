@@ -18,7 +18,6 @@ function init() {
 
 function setupListeners() {
     for (var i = 0; i < squares.length; i++) {
-
         squares[i].addEventListener("click", function () {
             if (this.style.backgroundColor === colorToGuessDisplay.textContent) {
                 feedbackText.textContent = "Correct!";
